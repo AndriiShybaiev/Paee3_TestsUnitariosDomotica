@@ -27,6 +27,19 @@ namespace DomoticaWPF
 
             InitializeComponent();
 
+            // Restore window position and size if configured
+            var config = Config.GetInstance();
+            if (config.WindowWidth.HasValue && config.WindowWidth.Value > 200)
+                Width = config.WindowWidth.Value;
+            if (config.WindowHeight.HasValue && config.WindowHeight.Value > 200)
+                Height = config.WindowHeight.Value;
+            if (config.WindowTop.HasValue && config.WindowLeft.HasValue)
+            {
+                WindowStartupLocation = WindowStartupLocation.Manual;
+                Top = config.WindowTop.Value;
+                Left = config.WindowLeft.Value;
+            }
+
             _conector = new ConectorSistemaDomoticaStub();
             Config.GetInstance().ConfigurationChanged += AplicaConfiguracion;
 
@@ -152,6 +165,22 @@ namespace DomoticaWPF
 
         protected override void OnClosed(EventArgs e)
         {
+            try
+            {
+                if (WindowState == WindowState.Normal)
+                {
+                    Config.GetInstance().WindowTop = Top;
+                    Config.GetInstance().WindowLeft = Left;
+                    Config.GetInstance().WindowWidth = Width;
+                    Config.GetInstance().WindowHeight = Height;
+                    Config.GetInstance().Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.GetInstance().Logger.TraceEvent(TraceEventType.Warning, 31, $"Error al guardar estado de ventana al cerrar: {ex.Message}");
+            }
+
             Config.GetInstance().Logger.TraceEvent(TraceEventType.Information, 30, "MainWindow cerrada.");
             base.OnClosed(e);
         }

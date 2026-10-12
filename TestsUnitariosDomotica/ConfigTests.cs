@@ -41,17 +41,34 @@ namespace TestsUnitariosDomotica
             Config config = Config.GetInstance();
             config.Color = "#E8F4F8";
             config.Idioma = "es-ES";
+            config.WindowTop = 100.0;
+            config.WindowLeft = 200.0;
             config.CreateBackup();
 
             // Simulate user changing values in dialog
             config.Color = "#FFF8E1";
             config.Idioma = "en-US";
+            config.WindowTop = 300.0;
+            config.WindowLeft = 400.0;
 
             // User cancels dialog -> restore
             config.RestoreBackup();
 
             Assert.That(config.Color, Is.EqualTo("#E8F4F8"));
             Assert.That(config.Idioma, Is.EqualTo("es-ES"));
+            Assert.That(config.WindowTop, Is.EqualTo(100.0));
+            Assert.That(config.WindowLeft, Is.EqualTo(200.0));
+        }
+
+        [Test]
+        public void Test_Config_WindowDimensionsProperties()
+        {
+            Config config = Config.GetInstance();
+            config.WindowWidth = 550.0;
+            config.WindowHeight = 450.0;
+
+            Assert.That(config.WindowWidth, Is.EqualTo(550.0));
+            Assert.That(config.WindowHeight, Is.EqualTo(450.0));
         }
 
         [Test]
