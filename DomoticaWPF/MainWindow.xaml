@@ -1,0 +1,123 @@
+<Window x:Class="DomoticaWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p="clr-namespace:DomoticaWPF.Properties"
+        mc:Ignorable="d"
+        Title="{x:Static p:Resources.AppTitle}"
+        Height="540" Width="480"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header Panel with Title & Config Button -->
+        <DockPanel Grid.Row="0" Margin="0,0,0,15">
+            <Button x:Name="btnConfig" DockPanel.Dock="Right"
+                    Content="{x:Static p:Resources.BtnConfig}"
+                    Padding="10,5" Height="32"
+                    Click="BtnConfig_Click"
+                    Background="#FFFFFF" BorderBrush="#B0BEC5" />
+            <TextBlock x:Name="txtTitle" Text="{x:Static p:Resources.AppTitle}"
+                       FontSize="18" FontWeight="Bold"
+                       VerticalAlignment="Center" Foreground="#263238" />
+        </DockPanel>
+
+        <!-- Visual Blind Simulator Box -->
+        <Border Grid.Row="1" Background="#FFFFFF"
+                BorderBrush="#90A4AE" BorderThickness="3"
+                CornerRadius="8" Padding="12" Margin="0,0,0,15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Window Frame with Blind -->
+                <Border Grid.Row="0" BorderBrush="#37474F" BorderThickness="4"
+                        CornerRadius="4" ClipToBounds="True" Background="#E1F5FE">
+                    <Grid>
+                        <!-- Sky / Outside View (Sun and clouds / landscape effect) -->
+                        <Canvas>
+                            <Ellipse Fill="#FDD835" Width="50" Height="50" Canvas.Left="20" Canvas.Top="20" />
+                            <Path Fill="#E0E0E0" Opacity="0.8"
+                                  Data="M 120,40 Q 140,20 170,35 Q 200,20 220,40 Q 230,55 210,65 L 130,65 Z" />
+                        </Canvas>
+
+                        <!-- Blind Canvas / Rectangle Container covering from top -->
+                        <!-- When Aperture = 0.0 (closed): Height covers 100% of window -->
+                        <!-- When Aperture = 1.0 (open): Height covers 0% of window -->
+                        <Grid VerticalAlignment="Top" x:Name="blindContainer" Height="220">
+                            <!-- Blind slats texture background -->
+                            <Border x:Name="blindSlatBorder" Background="#78909C" BorderBrush="#455A64" BorderThickness="0,0,0,3">
+                                <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,2,0,0">
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                    <Separator Background="#546E7A" Margin="0,3" Height="2" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <!-- Window divider frame (crossbars) -->
+                        <Grid>
+                            <Rectangle Width="3" Fill="#37474F" HorizontalAlignment="Center" />
+                            <Rectangle Height="3" Fill="#37474F" VerticalAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!-- Status & Percentage Bar -->
+                <StackPanel Grid.Row="1" Margin="0,10,0,0">
+                    <DockPanel LastChildFill="True" Margin="0,0,0,4">
+                        <TextBlock x:Name="txtNivelAperturaLabel" DockPanel.Dock="Left"
+                                   Text="{x:Static p:Resources.LblApertura}"
+                                   FontWeight="SemiBold" Foreground="#37474F" />
+                        <TextBlock x:Name="txtPorcentaje" DockPanel.Dock="Right"
+                                   Text="0%" FontWeight="Bold" Foreground="#0277BD"
+                                   HorizontalAlignment="Right" />
+                    </DockPanel>
+
+                    <ProgressBar x:Name="pbApertura" Height="14" Minimum="0" Maximum="100" Value="0"
+                                 Foreground="#0288D1" Background="#ECEFF1" BorderBrush="#B0BEC5" />
+
+                    <TextBlock x:Name="txtEstadoDescripcion"
+                               Text="{x:Static p:Resources.LblEstadoCerrado}"
+                               FontSize="12" Margin="0,4,0,0"
+                               HorizontalAlignment="Center" Foreground="#546E7A" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Blinds Control Buttons (Subir / Bajar) -->
+        <UniformGrid Grid.Row="2" Columns="2" Margin="0,0,0,10">
+            <Button x:Name="btnSubir" Content="{x:Static p:Resources.BtnSubir}"
+                    FontSize="14" FontWeight="Bold" Height="42" Margin="0,0,6,0"
+                    Background="#E3F2FD" BorderBrush="#2196F3"
+                    Click="BtnSubir_Click" />
+            <Button x:Name="btnBajar" Content="{x:Static p:Resources.BtnBajar}"
+                    FontSize="14" FontWeight="Bold" Height="42" Margin="6,0,0,0"
+                    Background="#ECEFF1" BorderBrush="#78909C"
+                    Click="BtnBajar_Click" />
+        </UniformGrid>
+
+        <!-- Footer / Instructions -->
+        <TextBlock Grid.Row="3" Text="Stub: ConectorSistemaDomoticaStub (Paso = 10%)"
+                   FontSize="11" Foreground="#78909C" HorizontalAlignment="Center" />
+    </Grid>
+</Window>

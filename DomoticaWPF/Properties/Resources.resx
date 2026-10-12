@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Control Domótico de Persianas</value>
+  </data>
+  <data name="BtnSubir" xml:space="preserve">
+    <value>▲ Subir Persiana</value>
+  </data>
+  <data name="BtnBajar" xml:space="preserve">
+    <value>▼ Bajar Persiana</value>
+  </data>
+  <data name="BtnConfig" xml:space="preserve">
+    <value>⚙ Personalización</value>
+  </data>
+  <data name="LblApertura" xml:space="preserve">
+    <value>Nivel de apertura:</value>
+  </data>
+  <data name="LblEstadoCerrado" xml:space="preserve">
+    <value>Persiana cerrada (0%)</value>
+  </data>
+  <data name="LblEstadoAbierto" xml:space="preserve">
+    <value>Persiana completamente abierta (100%)</value>
+  </data>
+  <data name="LblEstadoParcial" xml:space="preserve">
+    <value>Persiana parcialmente abierta ({0}%)</value>
+  </data>
+  <data name="ConfigTitle" xml:space="preserve">
+    <value>Personalización del Sistema</value>
+  </data>
+  <data name="ConfigColorGroup" xml:space="preserve">
+    <value>Color de Fondo de la Ventana</value>
+  </data>
+  <data name="ConfigIdiomaGroup" xml:space="preserve">
+    <value>Idioma de la Interfaz</value>
+  </data>
+  <data name="IdiomaEspanol" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="IdiomaIngles" xml:space="preserve">
+    <value>English (Inglés)</value>
+  </data>
+  <data name="BtnAceptar" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="BtnCancelar" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="BtnCerrar" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="ColorAzul" xml:space="preserve">
+    <value>Azul Claro</value>
+  </data>
+  <data name="ColorVerde" xml:space="preserve">
+    <value>Verde Menta</value>
+  </data>
+  <data name="ColorGris" xml:space="preserve">
+    <value>Gris Suave</value>
+  </data>
+  <data name="ColorCalido" xml:space="preserve">
+    <value>Arena Cálido</value>
+  </data>
+</root>
