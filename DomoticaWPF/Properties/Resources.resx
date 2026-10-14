@@ -112,4 +112,13 @@
   <data name="ColorCalido" xml:space="preserve">
     <value>Arena Cálido</value>
   </data>
+  <data name="LblStubInfo" xml:space="preserve">
+    <value>Stub: ConectorSistemaDomoticaStub (Paso = 10%)</value>
+  </data>
+  <data name="ConfigColorCustom" xml:space="preserve">
+    <value>Color personalizado (HEX):</value>
+  </data>
+  <data name="BtnAplicarColor" xml:space="preserve">
+    <value>Aplicar</value>
+  </data>
 </root>

@@ -112,4 +112,13 @@
   <data name="ColorCalido" xml:space="preserve">
     <value>Warm Sand</value>
   </data>
+  <data name="LblStubInfo" xml:space="preserve">
+    <value>Stub: ConectorSistemaDomoticaStub (Step = 10%)</value>
+  </data>
+  <data name="ConfigColorCustom" xml:space="preserve">
+    <value>Custom color (HEX):</value>
+  </data>
+  <data name="BtnAplicarColor" xml:space="preserve">
+    <value>Apply</value>
+  </data>
 </root>

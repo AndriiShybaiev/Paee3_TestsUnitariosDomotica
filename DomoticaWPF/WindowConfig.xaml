@@ -20,10 +20,20 @@
         <!-- Color Selection Group -->
         <GroupBox Grid.Row="0" Header="{x:Static p:Resources.ConfigColorGroup}" Margin="0,0,0,12" Padding="10">
             <StackPanel Orientation="Vertical">
-                <RadioButton x:Name="rbColorAzul" Content="{x:Static p:Resources.ColorAzul}" Tag="#E8F4F8" GroupName="BgColor" Margin="0,3" Checked="OnColorOptionChecked" />
-                <RadioButton x:Name="rbColorVerde" Content="{x:Static p:Resources.ColorVerde}" Tag="#E8F5E9" GroupName="BgColor" Margin="0,3" Checked="OnColorOptionChecked" />
-                <RadioButton x:Name="rbColorGris" Content="{x:Static p:Resources.ColorGris}" Tag="#F5F5F5" GroupName="BgColor" Margin="0,3" Checked="OnColorOptionChecked" />
-                <RadioButton x:Name="rbColorCalido" Content="{x:Static p:Resources.ColorCalido}" Tag="#FFF8E1" GroupName="BgColor" Margin="0,3" Checked="OnColorOptionChecked" />
+                <WrapPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <RadioButton x:Name="rbColorAzul" Content="{x:Static p:Resources.ColorAzul}" Tag="#E8F4F8" GroupName="BgColor" Margin="0,2,15,2" Checked="OnColorOptionChecked" />
+                    <RadioButton x:Name="rbColorVerde" Content="{x:Static p:Resources.ColorVerde}" Tag="#E8F5E9" GroupName="BgColor" Margin="0,2,15,2" Checked="OnColorOptionChecked" />
+                    <RadioButton x:Name="rbColorGris" Content="{x:Static p:Resources.ColorGris}" Tag="#F5F5F5" GroupName="BgColor" Margin="0,2,15,2" Checked="OnColorOptionChecked" />
+                    <RadioButton x:Name="rbColorCalido" Content="{x:Static p:Resources.ColorCalido}" Tag="#FFF8E1" GroupName="BgColor" Margin="0,2,0,2" Checked="OnColorOptionChecked" />
+                </WrapPanel>
+
+                <!-- Custom Color Picker / Hex Input -->
+                <DockPanel LastChildFill="True" Margin="0,4,0,0">
+                    <TextBlock Text="{x:Static p:Resources.ConfigColorCustom}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <Border x:Name="colorPreviewBox" Width="24" Height="24" BorderBrush="#90A4AE" BorderThickness="1" CornerRadius="2" Margin="0,0,8,0" Background="#E8F4F8" />
+                    <Button x:Name="btnAplicarHex" Content="{x:Static p:Resources.BtnAplicarColor}" DockPanel.Dock="Right" Width="65" Height="24" Click="BtnAplicarHex_Click" />
+                    <TextBox x:Name="txtCustomHex" Height="24" VerticalContentAlignment="Center" Margin="0,0,6,0" Text="#E8F4F8" TextChanged="TxtCustomHex_TextChanged" />
+                </DockPanel>
             </StackPanel>
         </GroupBox>
 

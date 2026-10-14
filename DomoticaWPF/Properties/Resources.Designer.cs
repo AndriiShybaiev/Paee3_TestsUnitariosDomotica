@@ -55,5 +55,8 @@ namespace DomoticaWPF.Properties {
         public static string ColorVerde => ResourceManager.GetString("ColorVerde", resourceCulture) ?? "Verde Menta";
         public static string ColorGris => ResourceManager.GetString("ColorGris", resourceCulture) ?? "Gris Suave";
         public static string ColorCalido => ResourceManager.GetString("ColorCalido", resourceCulture) ?? "Arena Cálido";
+        public static string LblStubInfo => ResourceManager.GetString("LblStubInfo", resourceCulture) ?? "Stub: ConectorSistemaDomoticaStub (Paso = 10%)";
+        public static string ConfigColorCustom => ResourceManager.GetString("ConfigColorCustom", resourceCulture) ?? "Color personalizado (HEX):";
+        public static string BtnAplicarColor => ResourceManager.GetString("BtnAplicarColor", resourceCulture) ?? "Aplicar";
     }
 }

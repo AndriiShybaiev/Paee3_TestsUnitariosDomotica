@@ -33,7 +33,38 @@ namespace DomoticaWPF
 
         private Config()
         {
+            try
+            {
+                // Register TraceConfiguration to bind App.config <system.diagnostics> to TraceSource in .NET Core / .NET 10
+                TraceConfiguration.Register();
+            }
+            catch
+            {
+                // Fallback if TraceConfiguration is not available in test runner
+            }
+
+            Trace.AutoFlush = true;
             Logger = new TraceSource("DomoticaWPF");
+
+            // Ensure TextWriterTraceListener is active if not loaded by runner config
+            bool hasFileListener = false;
+            foreach (TraceListener listener in Logger.Listeners)
+            {
+                if (listener is TextWriterTraceListener)
+                {
+                    hasFileListener = true;
+                    break;
+                }
+            }
+
+            if (!hasFileListener)
+            {
+                Logger.Listeners.Add(new TextWriterTraceListener("domoticaWPF.log", "textWriterListener")
+                {
+                    TraceOutputOptions = TraceOptions.DateTime
+                });
+                Logger.Switch = new SourceSwitch("myswitch", "Verbose");
+            }
         }
 
         public static Config GetInstance()
@@ -74,7 +105,7 @@ namespace DomoticaWPF
             ConfigurationChanged?.Invoke();
         }
 
-        public void Load()
+        public bool Load()
         {
             try
             {
@@ -110,14 +141,16 @@ namespace DomoticaWPF
 
                 CreateBackup();
                 Logger.TraceEvent(TraceEventType.Information, 100, $"Configuración cargada. Color={Color}, Idioma={Idioma}");
+                return true;
             }
             catch (Exception ex)
             {
                 Logger.TraceEvent(TraceEventType.Error, 101, $"Error al cargar configuración: {ex.Message}");
+                return false;
             }
         }
 
-        public void Save()
+        public bool Save()
         {
             try
             {
@@ -136,10 +169,12 @@ namespace DomoticaWPF
                 CreateBackup();
                 Logger.TraceEvent(TraceEventType.Information, 102, $"Configuración guardada correctamente. Color={Color}, Idioma={Idioma}");
                 NotifyChanged();
+                return true;
             }
             catch (Exception ex)
             {
                 Logger.TraceEvent(TraceEventType.Error, 103, $"Error al guardar configuración: {ex.Message}");
+                return false;
             }
         }
 

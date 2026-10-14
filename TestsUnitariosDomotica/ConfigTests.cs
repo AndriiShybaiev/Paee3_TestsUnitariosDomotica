@@ -78,19 +78,81 @@ namespace TestsUnitariosDomotica
             Assert.That(config.Logger, Is.Not.Null);
             Assert.That(config.Logger.Name, Is.EqualTo("DomoticaWPF"));
 
-            // Verify logging calls execute without errors
+            // Verify logging calls execute without errors and can trace messages
             Assert.DoesNotThrow(() =>
             {
-                config.Logger.TraceEvent(TraceEventType.Information, 999, "Test trace event message");
+                config.Logger.TraceEvent(TraceEventType.Information, 999, "Test trace event message from unit test");
+                config.Logger.Flush();
             });
+
+            // Verify listeners collection contains active listener
+            Assert.That(config.Logger.Listeners.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void Test_Config_SaveAndLoad_PersistenciaValoresReales()
+        {
+            Config config = Config.GetInstance();
+            string originalColor = config.Color;
+            string originalIdioma = config.Idioma;
+            double? originalTop = config.WindowTop;
+            double? originalLeft = config.WindowLeft;
+            double? originalWidth = config.WindowWidth;
+            double? originalHeight = config.WindowHeight;
+
+            try
+            {
+                // 1. Set specific configuration
+                config.Color = "#FFF8E1";
+                config.Idioma = "en-US";
+                config.WindowTop = 155.0;
+                config.WindowLeft = 255.0;
+                config.WindowWidth = 560.0;
+                config.WindowHeight = 460.0;
+
+                // 2. Save configuration to persistent storage
+                bool saved = config.Save();
+                Assert.That(saved, Is.True, "Config.Save() must return true on success.");
+
+                // 3. Mutate values in memory
+                config.Color = "#112233";
+                config.Idioma = "es-ES";
+                config.WindowTop = 10.0;
+                config.WindowLeft = 20.0;
+                config.WindowWidth = 300.0;
+                config.WindowHeight = 300.0;
+
+                // 4. Reload configuration from persistent storage
+                bool loaded = config.Load();
+                Assert.That(loaded, Is.True, "Config.Load() must return true on success.");
+
+                // 5. Assert that values match what was persisted
+                Assert.That(config.Color, Is.EqualTo("#FFF8E1"));
+                Assert.That(config.Idioma, Is.EqualTo("en-US"));
+                Assert.That(config.WindowTop, Is.EqualTo(155.0));
+                Assert.That(config.WindowLeft, Is.EqualTo(255.0));
+                Assert.That(config.WindowWidth, Is.EqualTo(560.0));
+                Assert.That(config.WindowHeight, Is.EqualTo(460.0));
+            }
+            finally
+            {
+                // Restore original state
+                config.Color = originalColor;
+                config.Idioma = originalIdioma;
+                config.WindowTop = originalTop;
+                config.WindowLeft = originalLeft;
+                config.WindowWidth = originalWidth;
+                config.WindowHeight = originalHeight;
+                config.Save();
+            }
         }
 
         [Test]
         public void Test_Config_SaveAndLoad_NoLanzanExcepcion()
         {
             Config config = Config.GetInstance();
-            Assert.DoesNotThrow(() => config.Save());
-            Assert.DoesNotThrow(() => config.Load());
+            Assert.That(config.Save(), Is.True);
+            Assert.That(config.Load(), Is.True);
         }
     }
 }

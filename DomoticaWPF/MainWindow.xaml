@@ -117,7 +117,7 @@
         </UniformGrid>
 
         <!-- Footer / Instructions -->
-        <TextBlock Grid.Row="3" Text="Stub: ConectorSistemaDomoticaStub (Paso = 10%)"
+        <TextBlock Grid.Row="3" Text="{x:Static p:Resources.LblStubInfo}"
                    FontSize="11" Foreground="#78909C" HorizontalAlignment="Center" />
     </Grid>
 </Window>
